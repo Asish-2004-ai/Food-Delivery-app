@@ -1,10 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import { FormControl, FormItem, FormLabel } from "@/components/ui/form"
-import { ControllerRenderProps, FieldValue } from "react-hook-form"
+import { ControllerRenderProps, } from "react-hook-form"
 
 type Props = {
   cuisines: string
-  field: ControllerRenderProps<FieldValue, "cuisines">
+  field: ControllerRenderProps<{ cuisines: string[] }, "cuisines">
 }
 
 const CheckBox = ({ cuisines, field }: Props) => {
