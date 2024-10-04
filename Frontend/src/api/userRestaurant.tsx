@@ -59,10 +59,9 @@ export const createUserRestaurant = () => {
 
   };
 
-  // useMutation hook to trigger the create restaurant function
   const { mutate: createRestaurant, isLoading, isSuccess, error } = useMutation(UserRestaurant);
 
-  // Use useEffect for toast notifications to avoid side effects outside React lifecycle
+
   if (isSuccess) {
     toast.success("Restaurant created successfully")
   }
