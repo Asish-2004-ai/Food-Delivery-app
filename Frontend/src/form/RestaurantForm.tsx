@@ -26,7 +26,7 @@ const formSchema = z.object({
         required_error: "DeliveryPrice is Requier",
         invalid_type_error: "must be a number"
     }),
-    estimatedDeliveryTime: z.coerce.number({
+    estimatedDeliveryTime: z.string({
         required_error: "EstimatedDeliveryTime is Requier",
         invalid_type_error: "must be a number"
 
@@ -115,7 +115,7 @@ const RestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
                 <MenuItem />
                 <br></br>
                 <MenuImg />
-                {isLoading ? <Loading /> : (<Button className='sm:mt-10' type='submit'>Submit</Button>)}
+                {isLoading ? <Loading /> : (<Button type='submit'>Submit</Button>)}
                 {/* <Button type='submit'>Submit</Button> */}
             </form>
         </Form>
