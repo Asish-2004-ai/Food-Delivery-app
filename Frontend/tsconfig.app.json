@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -6,25 +7,29 @@
         "./src/*"
       ]
     },
-    "target": "ES2020",
+    "target": "ES2020",  // Keep as ES2020 or upgrade to ES2022/ES2023 if needed
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "lib": [
+      "ES2020",           // DOM libraries for browser
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",    // Module system compatible with modern JS
     "skipLibCheck": true,
-
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "bundler",  // Vite-specific module resolution
     "allowImportingTsExtensions": true,
-    "isolatedModules": true,
+    "isolatedModules": true,        // Ensure each module is standalone (necessary for bundlers like Vite)
     "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
+    "noEmit": true,                 // Do not emit any output; just type-checking
+    "jsx": "react-jsx",             // Correct JSX setting for React 17+ and Vite
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
