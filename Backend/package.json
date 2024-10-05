@@ -7,7 +7,7 @@
     "dev": "concurrently \"nodemon\" \"npm run stripe\" ",
     "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
     "build": "tsc",       
-  "start": "node index.ts"
+  "start": "node index.js"
 
   },
   "author": "",
