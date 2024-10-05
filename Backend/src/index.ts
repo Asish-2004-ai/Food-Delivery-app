@@ -7,6 +7,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import Restaurant from './routes/restaurant'
 import searchRest from './routes/searchRestaurant'
 import Order from './routes/order'
+// import path from 'path'
 
 mongoose.connect(process.env.mongo_url as string).then(()=>{
     console.log("connected to database")
@@ -19,6 +20,8 @@ cloudinary.config({
 })
 
 const app = express()
+
+// const _dirname = path.resolve()
 app.use(cors())
 app.use("/api/order/checkout/webhook",express.raw({type: "*/*"}))
 app.use( express.json())
@@ -31,6 +34,11 @@ app.use('/api/user',userRouter)
 app.use('/api/my/restaurant',Restaurant)
 app.use('/api/restaurants', searchRest)
 app.use('/api/order',Order)
+
+// app.use(express.static(path.join(_dirname, "/frontend/dist")))
+// app.get("*", (req: Request, res: Response)=>{
+//     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
+// })
 
 app.listen(1000,()=>{
     console.log("server started")
