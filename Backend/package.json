@@ -1,13 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "ts-node ./src/index.ts",
-    "dev": "concurrently \"nodemon\" \"npm run stripe\" ",
+    "dev": "concurrently \"nodemon\" \"npm run stripe\"",
     "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
     "build": "tsc",
-    "start": "ts-node ./src/index.ts"
+    "start": "node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -33,7 +33,6 @@
     "@types/multer": "^1.4.12",
     "@types/node": "^22.5.1",
     "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }
