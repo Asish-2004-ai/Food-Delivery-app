@@ -41,7 +41,8 @@ app.get("*", (req: Request, res: Response)=>{
     res.sendFile(path.resolve(_dirname, "Frontend", "dist", "index.html"))
 })
 
-app.listen(1000,()=>{
+const port = process.env.PORT
+app.listen(port,()=>{
     console.log("server started")
 
 })
