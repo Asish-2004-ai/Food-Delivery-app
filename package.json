@@ -1,13 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "Backend/dist/index.js",
   
   "scripts": {
-    "dev": "concurrently \"nodemon backend/dist/index.js\" \"npm run stripe\" ",
+    "dev": "concurrently \"nodemon Backend/dist/index.js\" \"npm run stripe\" ",
     "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
-    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "nodemon Backend/dist/index.js"
+    "build": "npm run tsc && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "start": "node Backend/dist/index.js",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
