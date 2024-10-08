@@ -1,7 +1,7 @@
 
 import { NextFunction, Request, Response } from 'express';
 import {auth} from 'express-oauth2-jwt-bearer'
-import jwt from 'jsonwebtoken'
+import * as jwt from 'jsonwebtoken'
 import User from '../models/user';
 
 
@@ -16,8 +16,8 @@ declare global{
 }
 
 export const jwtCheck = auth({
-    audience: process.env.AUTH0_AUDIENCE,
-    issuerBaseURL: process.env.AUTH0_ISSUERBASEURL,
+    audience: "Food-Delivery Project",
+    issuerBaseURL: "https://dev-zf5e8av4e6h0kw1h.us.auth0.com/",
     tokenSigningAlg: 'RS256'
   });
 

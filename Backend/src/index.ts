@@ -27,22 +27,21 @@ app.use(cors())
 app.use("/api/order/checkout/webhook",express.raw({type: "*/*"}))
 app.use( express.json())
 
-// app.get('/', async(req: Request, res: Response)=>{
-//     res.json({message:"Hello hey"})
-// });
+app.get('/', async(req: Request, res: Response)=>{
+    res.json({message:"Hello hey"})
+});
 
 app.use('/api/user',userRouter)
 app.use('/api/my/restaurant',Restaurant)
 app.use('/api/restaurants', searchRest)
 app.use('/api/order',Order)
 
-app.use(express.static(path.join(_dirname, "/Frontend/dist")))
-app.get("*", (req: Request, res: Response)=>{
-    res.sendFile(path.resolve(_dirname, "Frontend", "dist", "index.html"))
-})
+// app.use(express.static(path.join(_dirname, "/frontend/dist")))
+// app.get("*", (req: Request, res: Response)=>{
+//     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
+// })
 
-const port = process.env.PORT
-app.listen(port,()=>{
+app.listen(1000,()=>{
     console.log("server started")
 
-})
+}) 

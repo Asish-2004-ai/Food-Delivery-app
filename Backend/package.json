@@ -1,19 +1,22 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "Backend/dist/index.js",
-  
+  "main": "./src/index.ts",
   "scripts": {
-    "dev": "concurrently \"nodemon Backend/dist/index.js\" \"npm run stripe\" ",
-    "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
-    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "nodemon Backend/dist/index.js"
-  },
+  "build": "tsc",
+  "dev": "concurrently \"npm run build:watch\" \"npm run serve\" \"npm run stripe\"",
+  "build:watch": "tsc --watch",
+  "serve": "nodemon ./dist/index.js",
+  "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
+  "start": "node ./dist/index.js"
+},
+
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.6",
+    "@auth0/auth0-react": "^2.2.4",
+    "@types/jsonwebtoken": "^9.0.6", 
     "cloudinary": "^2.4.0",
     "concurrently": "^9.0.1",
     "cors": "^2.8.5",
@@ -33,6 +36,7 @@
     "@types/multer": "^1.4.12",
     "@types/node": "^22.5.1",
     "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }
