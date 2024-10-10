@@ -15,7 +15,7 @@ const searchRestaurant_1 = __importDefault(require("./routes/searchRestaurant"))
 const order_1 = __importDefault(require("./routes/order"));
 const path_1 = require("path");
 
-mongoose_1.default.connect(process.env.mongo_url)
+mongoose_1.default.connect("mongodb+srv://asishdalabehera375:asish2004@cluster0.qm1b6.mongodb.net/test")
     .then(() => {
         console.log("connected to database");
     })
