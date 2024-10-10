@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "react-query";
 import { toast } from 'sonner';
 // import { useEffect } from "react";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "https://food-delivery-app-oigi.onrender.com"
 
 //get restaurant
 export const getUserRestaurant = () => {

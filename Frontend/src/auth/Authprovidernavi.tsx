@@ -11,10 +11,10 @@ const Authprovidernavi = ({ children }: Props) => {
     const navigate = useNavigate()
 
     // const { createUser } = createUserRegister();
-    const domain = import.meta.env.VITE_AUTH0_DOMAIN; 
-    const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-    const redirecturi = import.meta.env.VITE_AUTH0_CALLBACK_URL;
-    const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+    const domain = "dev-zf5e8av4e6h0kw1h.us.auth0.com"; 
+    const clientId = "QzpYIMBjFju317eyl7loCnGVZyfThUIC";
+    const redirecturi = "https://food-delivery-app-oigi.onrender.com";
+    const audience = "Food-Delivery Project";
 
     if (!domain || !clientId || !redirecturi ||!audience ) {
         throw new Error("Unable to configure Auth0");
