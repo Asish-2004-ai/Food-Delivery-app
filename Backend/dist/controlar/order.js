@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -21,10 +12,10 @@ const STRIPE = new stripe_1.default(process.env.STRIPE_API_KEYS);
 const FRONTEND_URL = process.env.FRONTEND_URL;
 const STRIPE_ENDPOINT_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
 console.log("api", process.env.STRIPE_API_KEYS);
-const createCheckoutSession = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createCheckoutSession = async (req, res) => {
     try {
         const checkoutSessionRequest = req.body;
-        const restaurant = yield restaurant_1.default.findById(checkoutSessionRequest.restaurantId);
+        const restaurant = await restaurant_1.default.findById(checkoutSessionRequest.restaurantId);
         if (!restaurant) {
             throw new Error("Not Found");
         }
@@ -38,13 +29,13 @@ const createCheckoutSession = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
         const lineItems = createLineItems(checkoutSessionRequest, restaurant.menuItems);
         console.log(lineItems);
-        const session = yield createSession(lineItems, newOrder._id.toString(), restaurant.deliveryPrice, restaurant._id.toString());
+        const session = await createSession(lineItems, newOrder._id.toString(), restaurant.deliveryPrice, restaurant._id.toString());
         console.log("session", session);
         if (!session.url) {
             console.error("Stripe session error:", session);
             return res.status(500).json({ message: "Error found in Stripe" });
         }
-        yield newOrder.save();
+        await newOrder.save();
         if (!process.env.STRIPE_API_KEYS || !process.env.FRONTEND_URL) {
             throw new Error("Environment variables STRIPE_API_KEYS or FRONTEND_URL are not set");
         }
@@ -54,7 +45,7 @@ const createCheckoutSession = (req, res) => __awaiter(void 0, void 0, void 0, fu
     catch (error) {
         res.status(500).json({ message: error.raw.message });
     }
-});
+};
 exports.createCheckoutSession = createCheckoutSession;
 const createLineItems = (checkoutSessionRequest, menuItems) => {
     const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
@@ -78,9 +69,9 @@ const createLineItems = (checkoutSessionRequest, menuItems) => {
     console.log("lineItems", lineItems);
     return lineItems;
 };
-const createSession = (lineItems, orderId, deliveryPrice, restaurantId) => __awaiter(void 0, void 0, void 0, function* () {
+const createSession = async (lineItems, orderId, deliveryPrice, restaurantId) => {
     const deliveryprice = deliveryPrice * deliveryPrice;
-    const sessionData = yield STRIPE.checkout.sessions.create({
+    const sessionData = await STRIPE.checkout.sessions.create({
         line_items: lineItems,
         shipping_options: [
             {
@@ -104,9 +95,8 @@ const createSession = (lineItems, orderId, deliveryPrice, restaurantId) => __awa
     });
     console.log("sessionData", sessionData);
     return sessionData;
-});
-const stripeWebhookHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+};
+const stripeWebhookHandler = async (req, res) => {
     let event;
     try {
         const sig = req.headers["stripe-signature"];
@@ -116,24 +106,24 @@ const stripeWebhookHandler = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.status(500).send(`webhook error - ${error.message}`);
     }
     if (event.type === "checkout.session.completed") {
-        const order = yield order_1.default.findById((_a = event.data.object.metadata) === null || _a === void 0 ? void 0 : _a.orderId);
+        const order = await order_1.default.findById(event.data.object.metadata?.orderId);
         if (!order) {
             return res.status(401).send({ message: "order not found" });
         }
         order.totalAmount = event.data.object.amount_total;
         order.status = "paid";
-        yield order.save();
+        await order.save();
     }
     res.status(200).send();
-});
+};
 exports.stripeWebhookHandler = stripeWebhookHandler;
-const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getOrders = async (req, res) => {
     try {
         console.log("userId:", req.userId); // Add this to check userId
         if (!req.userId) {
             return res.status(401).json({ message: 'Unauthorized' });
         }
-        const orders = yield order_1.default.find({ user: req.userId })
+        const orders = await order_1.default.find({ user: req.userId })
             .populate("restaurant")
             .populate("user");
         console.log("Orders", orders);
@@ -142,5 +132,5 @@ const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         res.status(500).json({ message: "Server Error" });
     }
-});
+};
 exports.getOrders = getOrders;

@@ -36,10 +36,10 @@ app.use('/api/my/restaurant',Restaurant)
 app.use('/api/restaurants', searchRest)
 app.use('/api/order',Order)
 
-// app.use(express.static(path.join(_dirname, "/frontend/dist")))
-// app.get("*", (req: Request, res: Response)=>{
-//     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
-// })
+app.use(express.static(path.join(_dirname, "/frontend/dist")))
+app.get("*", (req: Request, res: Response)=>{
+    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
+})
 
 app.listen(1000,()=>{
     console.log("server started")
