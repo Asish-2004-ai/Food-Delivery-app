@@ -10,7 +10,7 @@ import searchRest from './routes/searchRestaurant'
 import Order from './routes/order'
 import path from 'path'
 
-mongoose.connect(process.env.mongo_url as string).then(()=>{
+mongoose.connect("mongodb+srv://asishdalabehera375:asish2004@cluster0.qm1b6.mongodb.net/test").then(()=>{
     console.log("connected to database")
 }).catch((error)=>{console.log(error)})
 
