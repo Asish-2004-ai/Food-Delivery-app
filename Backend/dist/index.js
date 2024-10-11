@@ -32,6 +32,13 @@ cloudinary_1.v2.config({
 const app = (0, express.default)();
 const _dirname = path_1.resolve();
 
+const corsOptions = {
+    origin:"https://food-delivery-app-oigi.onrender.com",
+    Credential:true
+}
+
+app.use(cors_1.default(corsOptions))
+
 app.use((0, cors_1.default)());
 app.use("/api/order/checkout/webhook", express.default.raw({ type: "*/*" }));
 app.use(express.default.json());
