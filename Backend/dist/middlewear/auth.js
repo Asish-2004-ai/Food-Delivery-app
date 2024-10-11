@@ -8,7 +8,7 @@ const express_oauth2_jwt_bearer_1 = require("express-oauth2-jwt-bearer");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 exports.jwtCheck = (0, express_oauth2_jwt_bearer_1.auth)({
-    audience: "Food-Delivery Project",
+    audience: "Food-Delivery App",
     issuerBaseURL: "https://dev-zf5e8av4e6h0kw1h.us.auth0.com/",
     tokenSigningAlg: 'RS256'
 });
