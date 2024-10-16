@@ -3,7 +3,7 @@ import { Restaurant, searchRestaurant } from "@/type"
 import { useQuery } from "react-query"
 
 
-const BASE_URL = "https://food-delivery-app-oigi.onrender.com"
+const BASE_URL = process.env.VITE_BASE_URL;
 
 export const getRestaurant = (restaurantId?: string) => {
   const restaurant = async (): Promise<Restaurant> => {

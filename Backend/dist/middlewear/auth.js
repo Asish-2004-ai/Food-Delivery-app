@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,8 +8,8 @@ const express_oauth2_jwt_bearer_1 = require("express-oauth2-jwt-bearer");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 exports.jwtCheck = (0, express_oauth2_jwt_bearer_1.auth)({
-    audience: "Food-Delivery App",
-    issuerBaseURL: "https://dev-zf5e8av4e6h0kw1h.us.auth0.com/",
+    audience: process.env.AUTH0_AUDIENCE,
+    issuerBaseURL: process.env.AUTH0_ISSUERBASEURL,
     tokenSigningAlg: 'RS256'
 });
 const jwtDecode = async (req, res, next) => {

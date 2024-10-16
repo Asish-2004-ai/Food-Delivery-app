@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "main": "./backend/src/index.ts",
   "scripts": {
-    "dev": "concurrently \"nodemon ./Backend/dist/index.js\" \"npm run stripe\" ",
-    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "dev": "concurrently \"nodemon ./src/index.ts\" \"npm run stripe\" ",
     "stripe": "stripe listen --forward-to localhost:1000/api/order/checkout/webhook",
-    "start": "node ./Backend/dist/index.js"
+    "start": "node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",

@@ -15,7 +15,7 @@ const searchRestaurant_1 = __importDefault(require("./routes/searchRestaurant"))
 const order_1 = __importDefault(require("./routes/order"));
 const path_1 = require("path");
 
-mongoose_1.default.connect("mongodb+srv://asishdalabehera375:asish2004@cluster0.qm1b6.mongodb.net/test")
+mongoose_1.default.connect(process.env.mongo_url)
     .then(() => {
         console.log("connected to database");
     })
@@ -55,7 +55,7 @@ app.get("*", (req, res) => {
 });
 
 // Define the port and ensure it binds correctly
-const port = process.env.PORT || 1000;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
 });

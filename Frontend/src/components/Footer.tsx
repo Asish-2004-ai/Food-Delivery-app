@@ -6,9 +6,9 @@ const Footer = () => {
         <span className="flex text-white-500 font-bold text-3xl tracking-tight">
           UrDokan
         </span>
-        <span className="gap-4 flex md: text-white font-bold tracking-tight md:gap-10">
-          <span>Privacy Policy</span>
-          <span>Terms and Condition</span>
+        <span className="ms-5 flex md: text-white font-bold tracking-tight md:gap-10">
+          <span className="ms-12">Privacy Policy</span>
+          <span className='ms-12'>Terms and Condition</span>
         </span>
       </div>
       

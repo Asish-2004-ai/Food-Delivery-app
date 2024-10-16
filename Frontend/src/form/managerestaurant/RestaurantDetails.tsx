@@ -5,16 +5,16 @@ import { useFormContext } from "react-hook-form"
 const RestaurantDetails = () => {
     const { control } = useFormContext()
     return (
-       <div className = "space-y-4 md:p-10 w-[80vw]">
+       <div className = "space-y-4 md:p-10 w-[70vw]">
             <div  className = "w-full " >
                 <h2 className="font-bold text-2xl">Restaurant Details</h2>
                 <FormDescription>Enter details about your Restaurant</FormDescription>
             </div >
             <FormField control={control} name="restaurantName" render={({ field }) =>
-                <FormItem>
+                <FormItem className='sm:w-10'>
                     <FormLabel>Restaurant Name</FormLabel>
 
-                    <FormControl>
+                    <FormControl className='sm:w-10'>
                         <Input {...field} className="bg-white" />
                     </FormControl>
 

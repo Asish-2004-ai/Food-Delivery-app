@@ -10,7 +10,7 @@ import searchRest from './routes/searchRestaurant'
 import Order from './routes/order'
 import path from 'path'
 
-mongoose.connect("mongodb+srv://asishdalabehera375:asish2004@cluster0.qm1b6.mongodb.net/test").then(()=>{
+mongoose.connect(process.env.mongo_url as string).then(()=>{
     console.log("connected to database")
 }).catch((error)=>{console.log(error)})
 
@@ -24,12 +24,9 @@ const app = express()
 
 export const _dirname = path.resolve()
 
-const corsOptions = {
-    origin:"https://food-delivery-app-oigi.onrender.com",
-    Credential:true
-}
 
-app.use(cors(corsOptions))
+
+app.use(cors())
 app.use("/api/order/checkout/webhook",express.raw({type: "*/*"}))
 app.use( express.json())
 
@@ -42,12 +39,14 @@ app.use('/api/my/restaurant',Restaurant)
 app.use('/api/restaurants', searchRest)
 app.use('/api/order',Order)
 
-app.use(express.static(path.join(_dirname, "/frontend/dist")))
-app.get("*", (req: Request, res: Response)=>{
-    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
-})
+// app.use(express.static(path.join(_dirname, "/frontend/dist")))
+// app.get("*", (req: Request, res: Response)=>{
+//     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
+// })
 
-app.listen(1000,()=>{
+const port = process.env.PORT
+
+app.listen(port,()=>{
     console.log("server started")
 
 }) 

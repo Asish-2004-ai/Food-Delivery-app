@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "react-query";
 import { toast } from 'sonner';
 // import { useEffect } from "react";
 
-const BASE_URL = "https://food-delivery-app-oigi.onrender.com"
+const BASE_URL = process.env.VITE_BASE_URL;
 
 //get restaurant
 export const getUserRestaurant = () => {
@@ -12,7 +12,7 @@ export const getUserRestaurant = () => {
 
   const getRestaurant = async (): Promise<Restaurant> => {
     const accessToken = await getAccessTokenSilently()
-    const response = await fetch(`${BASE_URL}/api/my/restaurant`, {
+    const response = await fetch(`${BASE_URL}/api/my/restaurant/get`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -26,7 +26,7 @@ export const getUserRestaurant = () => {
     return response.json()
   }
 
-  const { data: currentRestaurant, isLoading } = useQuery("Fetch restaurant", getRestaurant,{refetchInterval:5000})
+  const { data: currentRestaurant, isLoading } = useQuery("Fetch restaurant", getRestaurant)
   return { currentRestaurant, isLoading }
 }
 
@@ -40,7 +40,7 @@ export const createUserRestaurant = () => {
     const accessToken = await getAccessTokenSilently();
 
     // API call to create a user restaurant
-    const response = await fetch(`${BASE_URL}/api/my/restaurant`, {
+    const response = await fetch(`${BASE_URL}/api/my/restaurant/create`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -82,7 +82,7 @@ export const UpdateUserRestaurant = () => {
   const updateRestaurant = async (RestaurantFormData: FormData): Promise<Restaurant> => {
     const accessToken = await getAccessTokenSilently()
 
-    const response = await fetch(`${BASE_URL}/api/my/restaurant`, {
+    const response = await fetch(`${BASE_URL}/api/my/restaurant/update`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${accessToken}`,

@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 
-const BASE_URL = "https://food-delivery-app-oigi.onrender.com"
+const BASE_URL = process.env.VITE_BASE_URL;
 type userRequest = {
     auth0Id: string,
     email: string
